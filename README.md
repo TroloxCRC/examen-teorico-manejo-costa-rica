@@ -6,11 +6,11 @@ Aplicación independiente para practicar educación vial, con preguntas original
 
 El banco de automóvil contiene **93 preguntas originales**, tres por cada uno de los **31 temas** del PDF aportado «Manual del Conductor Costa Rica 2026 — libro completo | Licencia de Conducir CR» (116 páginas, impresión del 22 de octubre de 2026).
 
-- Cada simulacro selecciona una pregunta por tema y nueve adicionales: **40 preguntas distintas, 50 minutos y meta 70/100**.
+- Cada simulacro selecciona una pregunta por tema, cuatro adicionales del manual y cinco señales visuales: **40 preguntas distintas, 50 minutos y meta 70/100**.
 - Se barajan preguntas y opciones. Las omitidas cuentan como incorrectas.
 - Práctica por tema, explicaciones con tema y página del PDF, revisión final y repaso de errores.
 - La distribución por temas es una decisión educativa de esta app, no una distribución oficial del examen.
-- El perfil de moto conserva su banco complementario de 54 preguntas elegibles. El PDF de automóvil no se usa como sustituto del manual específico de moto.
+- El perfil de moto conserva su banco complementario de 54 preguntas de texto y añade 56 preguntas visuales de señales. Su simulacro toma 35 preguntas de texto y cinco visuales. El PDF de automóvil no se usa como sustituto del manual específico de moto.
 
 ### Procedencia y límites
 
@@ -24,7 +24,7 @@ El formato de referencia 40 preguntas/50 minutos proviene del POI COSEVI 2025, p
 
 ## Abrir y compartir
 
-Descargá el repositorio como ZIP, descomprimilo y abrí `index.html`. Mantené juntos `index.html`, `style.css`, `questions.js`, `manual-questions.js` y `app.js`.
+Descargá el repositorio como ZIP, descomprimilo y abrí `index.html`. Mantené la estructura completa del repositorio, incluidos los archivos `signals-data.js`, `signals-feature.js`, `signals-feature.css` y la carpeta `assets/signs/`.
 
 Para servirlo localmente, desde la carpeta del proyecto, con Python 3:
 
@@ -34,7 +34,7 @@ python3 -m http.server 8000 --bind 127.0.0.1
 
 Abrí http://localhost:8000. En Windows podés usar `py` en lugar de `python3`. Para compartir en una red privada, usá `--bind 0.0.0.0` y compartí `http://IP-LOCAL:8000` con dispositivos de esa red. La computadora y el servidor deben seguir encendidos. Detenelo con Ctrl+C.
 
-Para publicarlo, subí los cinco archivos de la app a un hosting estático o configurá GitHub Pages para la rama `main`, carpeta raíz. No se necesitan claves ni compilación.
+Para publicarlo, subí todos los archivos de la app y la carpeta `assets/` a un hosting estático o configurá GitHub Pages para la rama `main`, carpeta raíz. No se necesitan claves ni compilación.
 
 ## Progreso y privacidad
 
@@ -51,6 +51,22 @@ Con Node.js, ejecutá:
 
 ```sh
 node tests/manual.test.cjs
+node tests/signals.test.cjs
 ```
 
 Las pruebas comprueban 93 preguntas, referencias válidas, tres por tema, 100 simulacros de 40 preguntas con 31 temas y sin repeticiones, correspondencia de respuestas tras barajar, filtros, puntuación, finalización por tiempo, repaso, persistencia y separación del banco de moto.
+
+## Catálogo completo de señales
+
+Se incorporaron las **56 señales únicas** de las seis páginas de [Licencia de Conducir CR](https://licenciadeconducircr.com/senales-de-transito/), revisadas el 22 de octubre de 2026. Se incluyen también sus variantes de velocidad. Esta cifra corresponde al catálogo enlazado, no a todas las señales existentes en Costa Rica.
+
+- Galería con imágenes locales SVG/WebP, buscador que ignora acentos y filtros por categoría.
+- Práctica visual de hasta 10 señales, explicaciones, resultado y repaso de errores.
+- Cinco preguntas visuales en cada simulacro principal de automóvil y moto.
+- Los significados se redactaron como resúmenes propios y cada ficha conserva su fuente.
+- `SIGNALS-SOURCES.md` registra las URLs de todas las fichas y de sus imágenes.
+- El material de origen es un sitio independiente; no se identifica como una fuente oficial.
+
+La sección de señales guarda su progreso al comprobar cada respuesta, con clave `ruta-cr-signals-v1`, separado de los resultados del examen. Su botón para borrar progreso sólo afecta señales; el botón del inicio sólo afecta preguntas del examen. Navegar por el catálogo no cuenta como practicar una señal.
+
+Los tests también verifican los 56 recursos locales, la correspondencia de respuestas, los filtros, la búsqueda, cinco señales por simulacro y la ausencia de preguntas repetidas.

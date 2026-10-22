@@ -42,7 +42,7 @@ Este sitio de terceros no se presenta en la app como una edición oficial autent
 
 ## Selección del simulacro
 
-El perfil de automóvil toma una pregunta aleatoria por tema y nueve adicionales de las preguntas restantes. Siempre son 40 preguntas únicas, con opciones barajadas. No se afirma que esa distribución sea la del examen oficial.
+El perfil de automóvil toma una pregunta aleatoria por tema, cuatro adicionales de las preguntas restantes del manual y cinco señales visuales del catálogo complementario. Siempre son 40 preguntas únicas, con opciones barajadas. No se afirma que esa distribución sea la del examen oficial.
 
 ## Criterio editorial
 
