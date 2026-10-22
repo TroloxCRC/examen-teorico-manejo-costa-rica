@@ -1,62 +1,56 @@
-# Ruta CR
+# Ruta CR · Examen teórico de manejo en Costa Rica
 
-App independiente para practicar educación vial en Costa Rica. Revisión de fuentes: 22 de octubre de 2026.
+Aplicación independiente para practicar educación vial, con preguntas originales, explicaciones y referencias. Funciona localmente y en cualquier hosting estático, sin dependencias ni backend.
 
-## Abrir sin instalar nada
+## Examen de automóvil basado en el manual aportado
 
-Descomprimí el ZIP y abrí `index.html` en un navegador moderno. Los cuatro archivos index.html, style.css, questions.js y app.js deben permanecer juntos. No requiere internet para practicar; los enlaces de fuentes sí lo requieren. Algunos navegadores limitan el guardado al abrir archivos directamente: para un origen estable usá el servidor local.
+El banco de automóvil contiene **93 preguntas originales**, tres por cada uno de los **31 temas** del PDF aportado «Manual del Conductor Costa Rica 2026 — libro completo | Licencia de Conducir CR» (116 páginas, impresión del 22 de octubre de 2026).
 
-## Hospedar localmente
+- Cada simulacro selecciona una pregunta por tema y nueve adicionales: **40 preguntas distintas, 50 minutos y meta 70/100**.
+- Se barajan preguntas y opciones. Las omitidas cuentan como incorrectas.
+- Práctica por tema, explicaciones con tema y página del PDF, revisión final y repaso de errores.
+- La distribución por temas es una decisión educativa de esta app, no una distribución oficial del examen.
+- El perfil de moto conserva su banco complementario de 54 preguntas elegibles. El PDF de automóvil no se usa como sustituto del manual específico de moto.
 
-Con Python 3 instalado, abrí una terminal dentro de esta carpeta y ejecutá:
+### Procedencia y límites
+
+El PDF recibido es una impresión de [Licencia de Conducir CR](https://licenciadeconducircr.com/manual-del-conductor-costa-rica-2026-libro-completo/), un sitio de terceros. Aunque el documento se presenta como oficial, su equivalencia con una edición oficial no se ha autenticado. No se redistribuye el PDF ni se reproduce su texto completo.
+
+Las preguntas y explicaciones se redactaron a partir de los conceptos del documento. Se evitaron sus afirmaciones ambiguas o inconsistentes, cifras legales no contrastadas y detalles de trámites que requieren verificación oficial. Las referencias de página corresponden al PDF aportado, no a la paginación del libro oficial. Ver [cobertura por tema](MANUAL-COVERAGE.md).
+
+Esta práctica no garantiza cubrir todas las materias ni preguntas del examen oficial. Desde el 2 de marzo de 2026 se evalúan manuales diferenciados de automóvil y motocicleta. Consultá el manual oficial correspondiente y las fuentes MOPT, COSEVI e Imprenta Nacional enlazadas dentro de la app.
+
+El formato de referencia 40 preguntas/50 minutos proviene del POI COSEVI 2025, página impresa 110; la nota 70, del comunicado MOPT de enero de 2025. No se confirmó el formato íntegro posterior a marzo de 2026. Los contenidos no se actualizan automáticamente.
+
+## Abrir y compartir
+
+Descargá el repositorio como ZIP, descomprimilo y abrí `index.html`. Mantené juntos `index.html`, `style.css`, `questions.js`, `manual-questions.js` y `app.js`.
+
+Para servirlo localmente, desde la carpeta del proyecto, con Python 3:
 
 ```sh
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-En Windows podés usar `py` en lugar de `python3`. Abrí http://localhost:8000. Detené el servidor con Ctrl+C.
+Abrí http://localhost:8000. En Windows podés usar `py` en lugar de `python3`. Para compartir en una red privada, usá `--bind 0.0.0.0` y compartí `http://IP-LOCAL:8000` con dispositivos de esa red. La computadora y el servidor deben seguir encendidos. Detenelo con Ctrl+C.
 
-## Compartir por Wi-Fi
+Para publicarlo, subí los cinco archivos de la app a un hosting estático o configurá GitHub Pages para la rama `main`, carpeta raíz. No se necesitan claves ni compilación.
 
-Desde esta misma carpeta ejecutá:
+## Progreso y privacidad
+
+El progreso permanece en el navegador, en `localStorage` con clave `ruta-cr-v1`. No hay cuentas, analítica ni sincronización. Los historiales anteriores se conservan; las preguntas antiguas exclusivas de automóvil fueron sustituidas por el nuevo banco y no aparecen en los repasos de automóvil. El contador de preguntas exploradas refleja únicamente el banco del perfil actual. El porcentaje acumulado y el historial incluyen sesiones anteriores.
+
+## Mantener y verificar
+
+- `manual-questions.js`: banco de automóvil; `topic`, `topicTitle` y `manualPage` permiten rastrear cada pregunta.
+- `questions.js`: banco complementario anterior, utilizado por el perfil de moto.
+- `app.js`: selección por temas, sesiones, resultados y referencias.
+- `style.css`: presentación adaptable.
+
+Con Node.js, ejecutá:
 
 ```sh
-python3 -m http.server 8000 --bind 0.0.0.0
+node tests/manual.test.cjs
 ```
 
-Compartí `http://IP-LOCAL-DE-TU-COMPUTADORA:8000` con dispositivos conectados a la misma red. La IP local aparece en la configuración de red del sistema (por ejemplo 192.168.1.25). Si el firewall lo solicita, permití acceso únicamente en tu red privada. La computadora debe seguir encendida y el servidor abierto. Este servidor sencillo es para pruebas y red local; no abras puertos del router para publicarlo en internet.
-
-## Compartir por internet
-
-Podés enviar este ZIP para que cada persona lo abra, o subir index.html, style.css, app.js y questions.js a cualquier hosting de archivos estáticos. index.html debe quedar en la raíz pública. No requiere backend, npm, API keys, base de datos ni proceso de compilación. El historial es independiente para cada navegador y dirección del sitio.
-
-## Funciones
-
-- 60 preguntas originales: 46 comunes, 6 de automóvil y 8 de moto.
-- Práctica por tema de hasta 10 preguntas, con explicación inmediata.
-- Simulacro con 40 preguntas distintas, 50 minutos y meta de 70/100.
-- Opciones y preguntas barajadas; revisión de todas las respuestas al finalizar.
-- Las omitidas cuentan como incorrectas. Se puede retroceder durante el simulacro.
-- Repaso de errores, historial de hasta 100 sesiones y progreso local.
-- Diseño adaptable y controles utilizables con teclado.
-- No hay analítica ni recursos remotos necesarios para funcionar.
-
-## Alcance y actualidad
-
-Desde el 2 de marzo de 2026 se evalúan manuales diferenciados de automóvil y motocicleta. Las fuentes enlazadas dentro de la aplicación son MOPT, COSEVI, Imprenta Nacional, PGR, UCR e INA.
-
-No es un banco oficial ni reproduce los manuales 2026. No se obtuvo el texto íntegro de esos manuales y no se garantiza cobertura completa. Debe utilizarse como refuerzo y junto al manual oficial correspondiente.
-
-40 preguntas y 50 minutos proceden del POI COSEVI 2025, página impresa 110. La nota mínima 70 figura en el comunicado MOPT de enero 2025. El formato íntegro posterior al cambio de marzo 2026 no pudo confirmarse; por eso se usa como referencia de práctica, no como promesa del formato real.
-
-La fecha indicada corresponde a revisión editorial, no a actualización automática. Las reglas y trámites pueden cambiar: consultá las fuentes enlazadas antes de presentarte al examen.
-
-## Editar y mantener
-
-El contenido se edita en questions.js. Cada objeto contiene id único, category, vehicle (`ambos`, `automovil` o `moto`), question, options (tres), answer (índice 0 a 2), explanation y source (URL oficial). Mantené un mínimo de 40 preguntas elegibles por perfil. app.js contiene comportamiento y textos; style.css, el diseño.
-
-El progreso usa la clave localStorage `ruta-cr-v1`. Se guarda al finalizar sesiones, no al abandonar una sesión incompleta. Para reiniciarlo usá “Borrar progreso”. Compartir los archivos no comparte tu historial.
-
-## Verificación realizada
-
-Sintaxis JavaScript, estructura y IDs de 60 preguntas; ambos perfiles con 40 preguntas sin repetición; resultados de 100 y 0; finalización por tiempo mediante prueba lógica; eliminación de errores resueltos; filtros y escritura del progreso. En navegador se verificaron la pantalla inicial y el flujo de respuesta, explicación y enlace a la fuente. No se esperaron 50 minutos reales ni se probó en dispositivos físicos.
+Las pruebas comprueban 93 preguntas, referencias válidas, tres por tema, 100 simulacros de 40 preguntas con 31 temas y sin repeticiones, correspondencia de respuestas tras barajar, filtros, puntuación, finalización por tiempo, repaso, persistencia y separación del banco de moto.
